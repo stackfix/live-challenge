@@ -1,4 +1,5 @@
 import { ChevronDown, ExternalLink, Info, Split } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { Card, CardContent } from "~/components/ui/card";
@@ -17,21 +18,17 @@ const FlowChartConnector = () => (
 
 // Left Section - Logo
 const ProductLogo = ({ product }: { product: Product }) => (
-  <div className="h-24 w-24 shrink-0 rounded-lg bg-gray-100">
-    <Link href={`/product/${product.slug}`}>
-      {product.logoUrl ? (
-        <img
-          src={product.logoUrl}
-          alt={`${product.name} logo`}
-          className="h-full w-full object-contain p-4"
-        />
-      ) : (
-        <div className="flex h-full w-full items-center justify-center text-gray-400">
-          <p className="text-4xl font-bold">{product.name?.[0] ?? "?"}</p>
-        </div>
-      )}
-    </Link>
-  </div>
+  <Link href={`/product/${product.slug}`} className="block">
+    <div className="h-10 w-10 rounded-lg bg-gray-100">
+      <Image
+        src={product.logoUrl ?? ""}
+        alt={`${product.name} logo`}
+        width={40}
+        height={40}
+        className="rounded-lg"
+      />
+    </div>
+  </Link>
 );
 
 // Middle Section - Product Info and Metrics
@@ -44,11 +41,15 @@ const ProductInfo = ({
   isExpanded: boolean;
   onExpandClick: () => void;
 }) => (
-  <div className="min-w-0 flex-1 border-r border-gray-200 px-6">
-    {/* Top Section */}
+  <div className="min-w-0 flex-1 px-6">
     <div className="mb-3 flex items-center gap-2">
-      <h2 className="text-base font-semibold">{product.name}</h2>
-      <ExternalLink className="h-3.5 w-3.5 text-gray-400" />
+      <Link
+        href={`/product/${product.slug}`}
+        className="flex items-center gap-2 hover:underline"
+      >
+        <h2 className="text-base font-semibold">{product.name}</h2>
+        <ExternalLink className="h-3.5 w-3.5 text-gray-400" />
+      </Link>
       <span className="rounded-md bg-red-100 px-1.5 py-0.5 text-xs font-medium text-red-700">
         Difficult to use
       </span>
