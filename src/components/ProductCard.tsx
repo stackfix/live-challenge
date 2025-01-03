@@ -29,35 +29,8 @@ const ProductLogo = ({ product }: { product: Product }) => (
   </div>
 );
 
-// Right Section - Top Part (Product Details)
-const ProductDetails = ({ product }: { product: Product }) => (
-  <div className="flex flex-1 items-start justify-between">
-    <div className="flex items-center gap-2">
-      <h2 className="text-xl font-semibold">{product.name}</h2>
-      <ExternalLink className="h-4 w-4 text-gray-400" />
-      <span className="rounded-md bg-red-100 px-2 py-0.5 text-sm font-medium text-red-700">
-        Difficult to use
-      </span>
-    </div>
-    <div className="text-right">
-      <div className="text-2xl font-bold">
-        ${product.pricing?.totalPrice ?? 0}
-      </div>
-      <div className="flex items-center justify-end gap-1 text-sm text-gray-500">
-        Per {product.pricing?.period ?? "month"} <Info className="h-4 w-4" />
-      </div>
-      <Link
-        href={`/product/${product.slug}`}
-        className="text-sm text-blue-600 hover:underline"
-      >
-        More details
-      </Link>
-    </div>
-  </div>
-);
-
-// Right Section - Bottom Part (Progress Bars)
-const ProductMetrics = ({
+// Middle Section - Product Info and Metrics
+const ProductInfo = ({
   product,
   isExpanded,
   onExpandClick,
@@ -66,72 +39,102 @@ const ProductMetrics = ({
   isExpanded: boolean;
   onExpandClick: () => void;
 }) => (
-  <div className="space-y-4">
-    <div className="flex items-center gap-2">
-      <button
-        onClick={onExpandClick}
-        className="flex h-6 w-6 items-center justify-center"
-      >
-        <ChevronDown
-          className={cn(
-            "h-4 w-4 transition-transform",
-            isExpanded && "rotate-180",
-          )}
-        />
-      </button>
-      <div className="rounded bg-amber-100 px-2 py-1 text-sm font-medium text-amber-700">
-        {product.productScoring?.fitScore ?? 0}%
-      </div>
-      <span className="text-sm text-gray-600">Okay fit</span>
+  <div className="min-w-0 flex-1">
+    <div className="mb-4 flex items-center gap-2">
+      <h2 className="text-xl font-semibold">{product.name}</h2>
+      <ExternalLink className="h-4 w-4 text-gray-400" />
+      <span className="rounded-md bg-red-100 px-2 py-0.5 text-sm font-medium text-red-700">
+        Difficult to use
+      </span>
     </div>
 
-    <div className="space-y-3">
+    <div className="space-y-4">
       <div className="flex items-center gap-2">
-        <span className="min-w-[140px] text-sm text-gray-600">
-          REQUIREMENTS MET
-        </span>
-        <div className="flex-1">
-          <div className="h-2 w-full rounded-full bg-gray-200">
-            <div
-              className="h-full rounded-full bg-gray-400"
-              style={{
-                width: `${
-                  product.requirements?.length
-                    ? ((product.requirements?.filter((r) => r.status === "met")
-                        ?.length ?? 0) /
-                        product.requirements.length) *
-                      100
-                    : 0
-                }%`,
-              }}
-            />
-          </div>
+        <button
+          onClick={onExpandClick}
+          className="flex h-6 w-6 items-center justify-center"
+        >
+          <ChevronDown
+            className={cn(
+              "h-4 w-4 transition-transform",
+              isExpanded && "rotate-180",
+            )}
+          />
+        </button>
+        <div className="rounded bg-amber-100 px-2 py-1 text-sm font-medium text-amber-700">
+          {product.productScoring?.fitScore ?? 0}%
         </div>
-        <span className="text-sm">
-          {product.requirements?.filter((r) => r.status === "met")?.length ?? 0}
-          /{product.requirements?.length ?? 0}
-        </span>
+        <span className="text-sm text-gray-600">Okay fit</span>
       </div>
 
-      <div className="flex items-center gap-2">
-        <span className="min-w-[140px] text-sm text-gray-600">
-          STACKFIX RATING
-        </span>
-        <div className="flex-1">
-          <div className="h-2 w-full rounded-full bg-gray-200">
-            <div
-              className="h-full rounded-full bg-gray-400"
-              style={{
-                width: `${((product.productScoring?.stackfixScore ?? 0) / 10) * 100}%`,
-              }}
-            />
+      <div className="space-y-3">
+        <div className="flex items-center gap-2">
+          <span className="min-w-[140px] text-sm text-gray-600">
+            REQUIREMENTS MET
+          </span>
+          <div className="flex-1">
+            <div className="h-2 w-full rounded-full bg-gray-200">
+              <div
+                className="h-full rounded-full bg-gray-400"
+                style={{
+                  width: `${
+                    product.requirements?.length
+                      ? ((product.requirements?.filter(
+                          (r) => r.status === "met",
+                        )?.length ?? 0) /
+                          product.requirements.length) *
+                        100
+                      : 0
+                  }%`,
+                }}
+              />
+            </div>
           </div>
+          <span className="whitespace-nowrap text-sm">
+            {product.requirements?.filter((r) => r.status === "met")?.length ??
+              0}
+            /{product.requirements?.length ?? 0}
+          </span>
         </div>
-        <span className="text-sm">
-          ★ {product.productScoring?.stackfixScore ?? 0}
-        </span>
+
+        <div className="flex items-center gap-2">
+          <span className="min-w-[140px] text-sm text-gray-600">
+            STACKFIX RATING
+          </span>
+          <div className="flex-1">
+            <div className="h-2 w-full rounded-full bg-gray-200">
+              <div
+                className="h-full rounded-full bg-gray-400"
+                style={{
+                  width: `${((product.productScoring?.stackfixScore ?? 0) / 10) * 100}%`,
+                }}
+              />
+            </div>
+          </div>
+          <span className="whitespace-nowrap text-sm">
+            ★ {product.productScoring?.stackfixScore ?? 0}
+          </span>
+        </div>
       </div>
     </div>
+  </div>
+);
+
+// Right Section - Pricing
+const PricingInfo = ({ product }: { product: Product }) => (
+  <div className="shrink-0 text-right">
+    <div className="text-2xl font-bold">
+      ${product.pricing?.totalPrice ?? 0}
+    </div>
+    <div className="flex items-center justify-end gap-1 text-sm text-gray-500">
+      Per {product.pricing?.period ?? "month"} <Info className="h-4 w-4" />
+    </div>
+    <Link
+      href={`/product/${product.slug}`}
+      className="text-sm text-blue-600 hover:underline"
+    >
+      More details
+    </Link>
   </div>
 );
 
@@ -208,21 +211,21 @@ export function ProductCard({ product, isLoading }: ProductCardProps) {
   }
 
   return (
-    <Card>
+    <Card className="w-full">
       <CardContent className="p-6">
-        <div className="flex gap-6">
-          {/* Left Section */}
+        <div className="flex w-full items-start justify-between gap-6">
+          {/* Left Section - Logo */}
           <ProductLogo product={product} />
 
-          {/* Right Section */}
-          <div className="flex flex-1 flex-col gap-6">
-            <ProductDetails product={product} />
-            <ProductMetrics
-              product={product}
-              isExpanded={isExpanded}
-              onExpandClick={() => setIsExpanded(!isExpanded)}
-            />
-          </div>
+          {/* Middle Section - Product Info and Metrics */}
+          <ProductInfo
+            product={product}
+            isExpanded={isExpanded}
+            onExpandClick={() => setIsExpanded(!isExpanded)}
+          />
+
+          {/* Right Section - Pricing */}
+          <PricingInfo product={product} />
         </div>
 
         {/* Expanded Section */}
