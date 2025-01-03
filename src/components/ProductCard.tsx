@@ -140,30 +140,48 @@ const ProductInfo = ({
 
 // Right Section - Pricing
 const PricingInfo = ({ product }: { product: Product }) => (
-  <div className="shrink-0 pl-6 text-right">
-    <div className="text-2xl font-bold">
-      ${product.pricing?.totalPrice ?? 0}
-    </div>
-    <div className="flex items-center justify-end gap-1 text-sm text-gray-500">
-      Per {product.pricing?.period ?? "month"} <Info className="h-3.5 w-3.5" />
+  <div className="flex w-[155px] flex-col items-end gap-2">
+    <div className="w-full text-right">
+      <div className="text-2xl font-semibold">
+        ${product.pricing?.totalPrice.toLocaleString()}
+      </div>
+      <div className="flex items-center justify-end gap-1 text-sm text-gray-500">
+        Per month
+        <Info className="h-4 w-4" />
+      </div>
     </div>
     <Link
       href={`/product/${product.slug}`}
-      className="text-sm text-blue-600 hover:underline"
+      className="w-full rounded-lg bg-white px-4 py-2 text-center text-sm shadow-sm hover:bg-gray-50"
     >
       More details
     </Link>
   </div>
 );
 
+const getScoreChipStyle = (score: number) => {
+  if (score >= 8.5) return "bg-emerald-100 text-emerald-700";
+  if (score >= 7.5) return "bg-amber-100 text-amber-700";
+  return "bg-red-100 text-red-700";
+};
+
 // Expanded Section
-const ExpandedContent = ({ product }: { product: Product }) => (
-  <div className="mt-6 border-t border-gray-200 pt-6">
+const ExpandedContent = ({ product }: { product: Product }) => {
+  const ratings = [
+    { label: "Ease of use", score: 9.2 },
+    { label: "Functionality", score: 7.1 },
+    { label: "Customization", score: 8.5 },
+    { label: "Exportability", score: 8.8 },
+    { label: "Customer Support", score: 7.2 },
+    { label: "Compliance", score: 8.2 },
+  ];
+
+  return (
     <div className="grid grid-cols-2 gap-8">
       {/* Requirements Section */}
       <div>
         <h3 className="mb-4 text-sm text-gray-500">REQUIREMENTS MET</h3>
-        <ul className="space-y-2">
+        <ul className="space-y-4">
           {product.requirements?.map((req, index) => (
             <li key={index} className="flex items-center gap-2">
               <div className="rounded-full bg-green-100 p-1">
@@ -181,7 +199,7 @@ const ExpandedContent = ({ product }: { product: Product }) => (
                   />
                 </svg>
               </div>
-              <span className="text-sm">{req.name}</span>
+              <span className="text-sm text-gray-700">{req.name}</span>
             </li>
           ))}
         </ul>
@@ -189,36 +207,31 @@ const ExpandedContent = ({ product }: { product: Product }) => (
 
       {/* Ratings Section */}
       <div>
-        <div className="flex items-center justify-between">
+        <div className="mb-4 flex items-center justify-between">
           <h3 className="text-sm text-gray-500">STACKFIX RATING</h3>
           <Link href="#" className="text-sm text-gray-500 hover:underline">
             How we test products
           </Link>
         </div>
-        <div className="mt-4 space-y-2">
-          {[
-            ["Ease of use", product.productScoring?.stackfixScore ?? 0],
-            ["Functionality", product.productScoring?.fitScore ?? 0],
-          ].map(([category, score]) => (
-            <div key={category} className="flex items-center justify-between">
-              <span className="text-sm">{category}</span>
-              <span
+        <ul className="space-y-4">
+          {ratings.map(({ label, score }) => (
+            <li key={label} className="flex items-center gap-3">
+              <div
                 className={cn(
-                  "rounded px-2 py-1 text-sm",
-                  Number(score) >= 8
-                    ? "bg-green-100 text-green-700"
-                    : "bg-red-100 text-red-700",
+                  "min-w-[2.75rem] rounded-full px-2 py-0.5 text-center text-sm font-medium",
+                  getScoreChipStyle(score),
                 )}
               >
                 {score}
-              </span>
-            </div>
+              </div>
+              <span className="text-sm text-gray-700">{label}</span>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 // Main Component
 export function ProductCard({ product, isLoading }: ProductCardProps) {
@@ -229,25 +242,24 @@ export function ProductCard({ product, isLoading }: ProductCardProps) {
   }
 
   return (
-    <Card className="w-full">
+    <Card className="w-full bg-[#FAF7F7]">
       <CardContent className="p-6">
         <div className="flex w-full items-start justify-between gap-6">
-          {/* Left Section - Logo */}
           <ProductLogo product={product} />
-
-          {/* Middle Section - Product Info and Metrics */}
           <ProductInfo
             product={product}
             isExpanded={isExpanded}
             onExpandClick={() => setIsExpanded(!isExpanded)}
           />
-
-          {/* Right Section - Pricing */}
           <PricingInfo product={product} />
         </div>
 
         {/* Expanded Section */}
-        {isExpanded && <ExpandedContent product={product} />}
+        {isExpanded && (
+          <div className="mt-6 rounded-lg bg-white p-6">
+            <ExpandedContent product={product} />
+          </div>
+        )}
       </CardContent>
     </Card>
   );
