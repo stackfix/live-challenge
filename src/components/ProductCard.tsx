@@ -1,4 +1,4 @@
-import { ChevronDown, ExternalLink, Info } from "lucide-react";
+import { ChevronDown, ExternalLink, Info, Split } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { Card, CardContent } from "~/components/ui/card";
@@ -9,6 +9,11 @@ interface ProductCardProps {
   product: Product;
   isLoading?: boolean;
 }
+const FlowChartConnector = () => (
+  <div className="flex items-center gap-2">
+    <Split className="h-4 w-4 rotate-90 text-gray-200" />
+  </div>
+);
 
 // Left Section - Logo
 const ProductLogo = ({ product }: { product: Product }) => (
@@ -73,11 +78,9 @@ const ProductInfo = ({
         <span className="text-xs text-gray-600">Okay fit</span>
       </div>
 
-      {/* Flow chart connector - L-shaped */}
-      <div className="relative h-12 w-6">
-        <div className="absolute left-0 top-0 h-full w-0.5 bg-gray-200" />
-        <div className="absolute left-0 top-1/2 h-0.5 w-full bg-gray-200" />
-      </div>
+      {/* Flow chart connector - Fork-shaped */}
+
+      <FlowChartConnector />
 
       {/* Right side - Progress Bars */}
       <div className="flex-1 space-y-2.5">
