@@ -1,6 +1,6 @@
 type TimePeriod = "day" | "week" | "month" | "year";
 
-type Requirement = {
+export type Requirement = {
   name: string;
   status: "met" | "unmet" | "partially-met";
 };
