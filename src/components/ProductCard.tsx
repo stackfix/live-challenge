@@ -39,41 +39,46 @@ const ProductInfo = ({
   isExpanded: boolean;
   onExpandClick: () => void;
 }) => (
-  <div className="min-w-0 flex-1">
-    <div className="mb-4 flex items-center gap-2">
-      <h2 className="text-xl font-semibold">{product.name}</h2>
-      <ExternalLink className="h-4 w-4 text-gray-400" />
-      <span className="rounded-md bg-red-100 px-2 py-0.5 text-sm font-medium text-red-700">
+  <div className="min-w-0 flex-1 border-r border-gray-200 px-6">
+    {/* Top Section */}
+    <div className="mb-3 flex items-center gap-2">
+      <h2 className="text-base font-semibold">{product.name}</h2>
+      <ExternalLink className="h-3.5 w-3.5 text-gray-400" />
+      <span className="rounded-md bg-red-100 px-1.5 py-0.5 text-xs font-medium text-red-700">
         Difficult to use
       </span>
     </div>
 
-    <div className="space-y-4">
+    {/* Divider */}
+    <div className="my-3 border-t border-gray-200" />
+
+    {/* Bottom Section */}
+    <div className="space-y-3">
       <div className="flex items-center gap-2">
         <button
           onClick={onExpandClick}
-          className="flex h-6 w-6 items-center justify-center"
+          className="flex h-5 w-5 items-center justify-center"
         >
           <ChevronDown
             className={cn(
-              "h-4 w-4 transition-transform",
+              "h-3.5 w-3.5 transition-transform",
               isExpanded && "rotate-180",
             )}
           />
         </button>
-        <div className="rounded bg-amber-100 px-2 py-1 text-sm font-medium text-amber-700">
+        <div className="rounded bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-700">
           {product.productScoring?.fitScore ?? 0}%
         </div>
-        <span className="text-sm text-gray-600">Okay fit</span>
+        <span className="text-xs text-gray-600">Okay fit</span>
       </div>
 
-      <div className="space-y-3">
+      <div className="space-y-2.5">
         <div className="flex items-center gap-2">
-          <span className="min-w-[140px] text-sm text-gray-600">
+          <span className="min-w-[120px] text-xs text-gray-600">
             REQUIREMENTS MET
           </span>
-          <div className="flex-1">
-            <div className="h-2 w-full rounded-full bg-gray-200">
+          <div className="relative flex-1">
+            <div className="h-1.5 w-full rounded-full bg-gray-100">
               <div
                 className="h-full rounded-full bg-gray-400"
                 style={{
@@ -89,8 +94,10 @@ const ProductInfo = ({
                 }}
               />
             </div>
+            {/* Progress bar pattern overlay */}
+            <div className="absolute right-0 top-0 h-full w-1/4 bg-[linear-gradient(45deg,rgba(255,255,255,.2)_25%,transparent_25%,transparent_50%,rgba(255,255,255,.2)_50%,rgba(255,255,255,.2)_75%,transparent_75%,transparent)] bg-[length:8px_8px]" />
           </div>
-          <span className="whitespace-nowrap text-sm">
+          <span className="whitespace-nowrap text-xs">
             {product.requirements?.filter((r) => r.status === "met")?.length ??
               0}
             /{product.requirements?.length ?? 0}
@@ -98,11 +105,11 @@ const ProductInfo = ({
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="min-w-[140px] text-sm text-gray-600">
+          <span className="min-w-[120px] text-xs text-gray-600">
             STACKFIX RATING
           </span>
           <div className="flex-1">
-            <div className="h-2 w-full rounded-full bg-gray-200">
+            <div className="h-1.5 w-full rounded-full bg-gray-100">
               <div
                 className="h-full rounded-full bg-gray-400"
                 style={{
@@ -111,7 +118,7 @@ const ProductInfo = ({
               />
             </div>
           </div>
-          <span className="whitespace-nowrap text-sm">
+          <span className="whitespace-nowrap text-xs">
             ★ {product.productScoring?.stackfixScore ?? 0}
           </span>
         </div>
@@ -122,12 +129,12 @@ const ProductInfo = ({
 
 // Right Section - Pricing
 const PricingInfo = ({ product }: { product: Product }) => (
-  <div className="shrink-0 text-right">
+  <div className="shrink-0 pl-6 text-right">
     <div className="text-2xl font-bold">
       ${product.pricing?.totalPrice ?? 0}
     </div>
     <div className="flex items-center justify-end gap-1 text-sm text-gray-500">
-      Per {product.pricing?.period ?? "month"} <Info className="h-4 w-4" />
+      Per {product.pricing?.period ?? "month"} <Info className="h-3.5 w-3.5" />
     </div>
     <Link
       href={`/product/${product.slug}`}
