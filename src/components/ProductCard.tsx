@@ -52,8 +52,9 @@ const ProductInfo = ({
     {/* Divider */}
     <div className="my-3 border-t border-gray-200" />
 
-    {/* Bottom Section */}
-    <div className="space-y-3">
+    {/* Bottom Section - Flow Chart Layout */}
+    <div className="flex items-center gap-4">
+      {/* Left side - Status */}
       <div className="flex items-center gap-2">
         <button
           onClick={onExpandClick}
@@ -72,7 +73,14 @@ const ProductInfo = ({
         <span className="text-xs text-gray-600">Okay fit</span>
       </div>
 
-      <div className="space-y-2.5">
+      {/* Flow chart connector - L-shaped */}
+      <div className="relative h-12 w-6">
+        <div className="absolute left-0 top-0 h-full w-0.5 bg-gray-200" />
+        <div className="absolute left-0 top-1/2 h-0.5 w-full bg-gray-200" />
+      </div>
+
+      {/* Right side - Progress Bars */}
+      <div className="flex-1 space-y-2.5">
         <div className="flex items-center gap-2">
           <span className="min-w-[120px] text-xs text-gray-600">
             REQUIREMENTS MET
