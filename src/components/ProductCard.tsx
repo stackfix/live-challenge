@@ -183,7 +183,7 @@ const PricingInfo = ({ product }: { product: Product }) => (
     </div>
     <Link
       href={`/product/${product.slug}`}
-      className="w-full rounded-lg bg-white px-4 py-2 text-center text-sm shadow-sm hover:bg-gray-50"
+      className="w-full rounded-md bg-white px-4 py-2 text-center text-sm shadow-sm hover:bg-gray-50"
     >
       More details
     </Link>
