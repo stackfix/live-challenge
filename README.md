@@ -2,6 +2,25 @@
 
 A modern product comparison platform built with the T3 Stack, featuring advanced filtering, searching, and multiple view options.
 
+## How to run
+
+```bash
+pnpm install
+pnpm run dev
+```
+
+## Docker setup:
+
+```bash
+docker compose up -d
+```
+
+## Database setup:
+
+```bash
+pnpm db:setup
+```
+
 ## Tech Stack
 
 - **Framework**: [Next.js](https://nextjs.org) - React framework for production
