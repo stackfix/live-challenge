@@ -1,5 +1,5 @@
 import { type Product } from "~/server/api/routers/product/types";
-import { ProductCard } from "./ProductCard";
+import { ProductCard } from "./product-card";
 
 interface ProductCardGridProps {
   isLoading: boolean;

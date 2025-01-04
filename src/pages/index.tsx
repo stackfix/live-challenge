@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useState } from "react";
-import { ProductCardGrid } from "~/components/ProductCardGrid";
+import { ProductCardGrid } from "~/components/product-card-grid";
 import { api } from "~/utils/api";
 
 export default function Home() {

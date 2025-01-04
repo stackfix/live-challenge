@@ -1,7 +1,7 @@
 import { type NextPage } from "next";
 import Link from "next/link";
 import { useState } from "react";
-import { ProductSearch } from "~/components/ProductSearch";
+import { ProductSearch } from "~/components/product-search";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { api } from "~/utils/api";
 
