@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useState } from "react";
-import { ClassicTable, type Column } from "~/components/classic-table";
+import { ClassicTable, type Column } from "~/components/ui/classic-table";
 import { type Product } from "~/server/api/routers/product/types";
 import { api } from "~/utils/api";
 
