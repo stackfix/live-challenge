@@ -22,14 +22,16 @@ const FlowChartConnector = () => (
 // Left Section - Logo
 const ProductLogo = ({ product }: { product: Product }) => (
   <Link href={`/product/${product.slug}`} className="block">
-    <div className="h-10 w-10 rounded-lg bg-gray-100">
-      <Image
-        src={product.logoUrl ?? ""}
-        alt={`${product.name} logo`}
-        width={40}
-        height={40}
-        className="rounded-lg"
-      />
+    <div className="flex h-[88px] w-[88px] items-center justify-center rounded-lg bg-white p-6 shadow-sm">
+      <div className="relative h-10 w-10">
+        <Image
+          src={product.logoUrl ?? ""}
+          alt={`${product.name} logo`}
+          width={40}
+          height={40}
+          className="rounded-lg object-contain"
+        />
+      </div>
     </div>
   </Link>
 );
