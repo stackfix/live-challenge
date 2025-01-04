@@ -39,7 +39,7 @@ export const productRouter = createTRPCRouter({
       },
       requirements: product.requirements.map((req: Requirement) => ({
         name: req.name,
-        status: req.status,
+        status: req.status as "met" | "unmet" | "partially-met",
       })),
     }));
   }),
@@ -69,17 +69,17 @@ export const productRouter = createTRPCRouter({
       slug: product.slug,
       logoUrl: product.logoUrl ?? undefined,
       productScoring: {
-        stackfixScore: product.productScoring.stackfixScore,
-        fitScore: product.productScoring.fitScore,
+        stackfixScore: product.stackfixScore,
+        fitScore: product.fitScore,
       },
       dealBreakers: product.dealBreakers ?? [],
       pricing: {
         totalPrice: product.totalPrice,
         period: product.pricingPeriod,
       },
-      requirements: product.requirements.map((req: Requirement) => ({
+      requirements: product.requirements.map((req) => ({
         name: req.name,
-        status: req.status,
+        status: req.status as "met" | "unmet" | "partially-met",
       })),
     };
   }),
