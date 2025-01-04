@@ -289,7 +289,11 @@ const ExpandedContent = ({ product }: { product: Product }) => {
       <div>
         <div className="mb-4 flex items-center justify-between">
           <h3 className="text-sm text-gray-500">STACKFIX RATING</h3>
-          <Link href="#" className="text-sm text-gray-500 hover:underline">
+          <Link
+            href={`/product/${product.slug}`}
+            className="flex items-center gap-1 text-sm text-gray-500 underline hover:text-gray-700"
+          >
+            <InfoCircledIcon className="h-4 w-4" />
             How we test products
           </Link>
         </div>
