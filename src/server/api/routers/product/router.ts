@@ -83,4 +83,14 @@ export const productRouter = createTRPCRouter({
       })),
     };
   }),
+
+  search: publicProcedure.input(z.string()).query(async ({ input }) => {
+    const products = await prisma.product.findMany({
+      where: {
+        OR: [{ name: { contains: input, mode: "insensitive" } }],
+      },
+      take: 5,
+    });
+    return products;
+  }),
 });
