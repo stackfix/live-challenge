@@ -1,4 +1,4 @@
-type TimePeriod = "day" | "week" | "month" | "year";
+export type TimePeriod = "day" | "week" | "month" | "year";
 
 export type Requirement = {
   name: string;

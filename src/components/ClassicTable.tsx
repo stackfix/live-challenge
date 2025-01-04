@@ -15,6 +15,10 @@ interface ClassicTableProps<T> {
   onSearch?: (query: string) => void;
   isLoading?: boolean;
   rowsPerPage?: number;
+  currentPage: number;
+  totalItems: number;
+  onPageChange: (page: number) => void;
+  serverSidePagination?: boolean;
 }
 
 export function ClassicTable<T>({
@@ -25,58 +29,74 @@ export function ClassicTable<T>({
   onSearch,
   isLoading,
   rowsPerPage = 10,
+  currentPage,
+  totalItems,
+  onPageChange,
+  serverSidePagination = false,
 }: ClassicTableProps<T>) {
   const [sortConfig, setSortConfig] = useState({
     key: defaultSortColumn || "",
     direction: defaultSortDirection,
   });
   const [searchQuery, setSearchQuery] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
 
-  // Filter data based on search query
-  const filteredData = data.filter((item) => {
-    if (!searchQuery) return true;
+  // Only apply client-side filtering if not using server-side pagination
+  const filteredData = serverSidePagination
+    ? data
+    : data.filter((item) => {
+        if (!searchQuery) return true;
+        return columns.some((column) => {
+          const value =
+            typeof column.accessor === "function"
+              ? column.accessor(item)
+              : item[column.accessor];
+          return String(value)
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase());
+        });
+      });
 
-    return columns.some((column) => {
-      const value =
-        typeof column.accessor === "function"
-          ? column.accessor(item)
-          : item[column.accessor];
+  // Only apply client-side sorting if not using server-side pagination
+  const sortedData = serverSidePagination
+    ? filteredData
+    : [...filteredData].sort((a, b) => {
+        if (!sortConfig.key) return 0;
 
-      return String(value).toLowerCase().includes(searchQuery.toLowerCase());
-    });
-  });
+        const column = columns.find((col) => col.header === sortConfig.key);
+        if (!column) return 0;
 
-  // Sort the filtered data
-  const sortedData = [...filteredData].sort((a, b) => {
-    if (!sortConfig.key) return 0;
+        let aValue: string | number;
+        let bValue: string | number;
 
-    const column = columns.find((col) => col.header === sortConfig.key);
-    if (!column) return 0;
+        if (typeof column.accessor === "function") {
+          aValue = column.accessor(a);
+          bValue = column.accessor(b);
+        } else {
+          aValue = a[column.accessor] as string | number;
+          bValue = b[column.accessor] as string | number;
+        }
 
-    let aValue: string | number;
-    let bValue: string | number;
-
-    if (typeof column.accessor === "function") {
-      aValue = column.accessor(a);
-      bValue = column.accessor(b);
-    } else {
-      aValue = a[column.accessor] as string | number;
-      bValue = b[column.accessor] as string | number;
-    }
-
-    if (aValue < bValue) return sortConfig.direction === "asc" ? -1 : 1;
-    if (aValue > bValue) return sortConfig.direction === "asc" ? 1 : -1;
-    return 0;
-  });
+        if (aValue < bValue) return sortConfig.direction === "asc" ? -1 : 1;
+        if (aValue > bValue) return sortConfig.direction === "asc" ? 1 : -1;
+        return 0;
+      });
 
   // Pagination logic
-  const totalPages = Math.ceil(sortedData.length / rowsPerPage);
-  const startIndex = (currentPage - 1) * rowsPerPage;
-  const paginatedData = sortedData.slice(startIndex, startIndex + rowsPerPage);
+  const totalPages = Math.ceil(totalItems / rowsPerPage);
+  const paginatedData = serverSidePagination
+    ? sortedData
+    : sortedData.slice(
+        (currentPage - 1) * rowsPerPage,
+        currentPage * rowsPerPage,
+      );
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+    onSearch?.(query);
+    if (serverSidePagination) {
+      onPageChange(1); // Reset to first page on search
+    }
   };
 
   const requestSort = (header: string) => {
@@ -88,12 +108,6 @@ export function ClassicTable<T>({
       direction:
         current.key === header && current.direction === "asc" ? "desc" : "asc",
     }));
-  };
-
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const query = e.target.value;
-    setSearchQuery(query);
-    onSearch?.(query);
   };
 
   return (
@@ -125,9 +139,9 @@ export function ClassicTable<T>({
           </div>
         </div>
         <div className="text-sm text-gray-500">
-          Showing {startIndex + 1} to{" "}
-          {Math.min(startIndex + rowsPerPage, sortedData.length)} of{" "}
-          {sortedData.length} entries
+          Showing {currentPage * rowsPerPage - rowsPerPage + 1} to{" "}
+          {Math.min(currentPage * rowsPerPage, totalItems)} of {totalItems}{" "}
+          entries
         </div>
       </div>
 
@@ -188,7 +202,7 @@ export function ClassicTable<T>({
         <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
           <div className="flex flex-1 justify-between sm:hidden">
             <button
-              onClick={() => handlePageChange(currentPage - 1)}
+              onClick={() => onPageChange(currentPage - 1)}
               disabled={currentPage === 1}
               className={cn(
                 "relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700",
@@ -200,7 +214,7 @@ export function ClassicTable<T>({
               Previous
             </button>
             <button
-              onClick={() => handlePageChange(currentPage + 1)}
+              onClick={() => onPageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
               className={cn(
                 "relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700",
@@ -219,7 +233,7 @@ export function ClassicTable<T>({
                 aria-label="Pagination"
               >
                 <button
-                  onClick={() => handlePageChange(currentPage - 1)}
+                  onClick={() => onPageChange(currentPage - 1)}
                   disabled={currentPage === 1}
                   className={cn(
                     "relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500",
@@ -245,7 +259,7 @@ export function ClassicTable<T>({
                 {[...Array(totalPages)].map((_, index) => (
                   <button
                     key={index + 1}
-                    onClick={() => handlePageChange(index + 1)}
+                    onClick={() => onPageChange(index + 1)}
                     className={cn(
                       "relative inline-flex items-center border px-4 py-2 text-sm font-medium",
                       currentPage === index + 1
@@ -258,7 +272,7 @@ export function ClassicTable<T>({
                 ))}
 
                 <button
-                  onClick={() => handlePageChange(currentPage + 1)}
+                  onClick={() => onPageChange(currentPage + 1)}
                   disabled={currentPage === totalPages}
                   className={cn(
                     "relative inline-flex items-center rounded-r-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500",
