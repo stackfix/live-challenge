@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { cn } from "~/lib/utils";
 
-interface Column<T> {
+export interface Column<T> {
   header: string;
-  accessor: keyof T | ((item: T) => string | number);
+  accessor: ((item: T) => string | number) | keyof T;
   sortable?: boolean;
 }
 

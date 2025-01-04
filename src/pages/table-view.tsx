@@ -1,14 +1,14 @@
-import { ClassicTable } from "~/components/ClassicTable";
+import { ClassicTable, type Column } from "~/components/ClassicTable";
 import { type Product } from "~/server/api/routers/product/types";
 import { api } from "~/utils/api";
 
 export default function TableView() {
   const { data: products, isLoading } = api.product.getAll.useQuery();
 
-  const columns = [
+  const columns: Column<Product>[] = [
     {
       header: "Name",
-      accessor: "name",
+      accessor: "name" as keyof Product,
       sortable: true,
     },
     {
