@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useState } from "react";
 import { ClassicTable, type Column } from "~/components/ClassicTable";
 import { type Product } from "~/server/api/routers/product/types";
@@ -62,7 +63,24 @@ export default function TableView() {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="mb-6 text-2xl font-bold">Products Table View</h1>
+      <div className="mb-6 flex items-center justify-between">
+        <h1 className="text-2xl font-bold">Products Table View</h1>
+        <div className="flex gap-2">
+          <Link
+            href="/compare"
+            className="rounded-md bg-blue-500 px-4 py-2 text-sm text-white hover:bg-blue-600"
+          >
+            Compare Products
+          </Link>
+          <Link
+            href="/"
+            className="rounded-md bg-gray-100 px-4 py-2 text-sm hover:bg-gray-200"
+          >
+            Switch to Card View
+          </Link>
+        </div>
+      </div>
+
       <ClassicTable<Product>
         data={paginatedData?.items ?? []}
         columns={columns}

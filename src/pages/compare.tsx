@@ -1,4 +1,5 @@
 import { type NextPage } from "next";
+import Link from "next/link";
 import { useState } from "react";
 import { ProductSearch } from "~/components/ProductSearch";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
@@ -97,7 +98,17 @@ const ComparePage: NextPage = () => {
 
   return (
     <div className="container mx-auto py-8">
-      <h1 className="mb-8 text-3xl font-bold">Compare Products</h1>
+      <div className="mb-8 flex items-center justify-between">
+        <h1 className="text-3xl font-bold">Compare Products</h1>
+        <div className="flex gap-2">
+          <Link
+            href="/"
+            className="rounded-md bg-gray-100 px-4 py-2 text-sm hover:bg-gray-200"
+          >
+            Go to Card View
+          </Link>
+        </div>
+      </div>
 
       <div className="grid grid-cols-2 gap-8">
         <div className="space-y-4">
