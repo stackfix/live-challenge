@@ -35,6 +35,33 @@ const ProductLogo = ({ product }: { product: Product }) => (
 );
 
 // Middle Section - Product Info and Metrics
+const FitScoreDisplay = ({ score }: { score: number }) => {
+  const getFitStatus = (score: number) => {
+    if (score >= 80)
+      return { text: "Great fit", color: "text-emerald-600 bg-emerald-100" };
+    if (score >= 60)
+      return { text: "Okay fit", color: "text-amber-600 bg-amber-100" };
+    return { text: "Poor fit", color: "text-red-600 bg-red-100" };
+  };
+
+  const { text, color } = getFitStatus(score);
+
+  return (
+    <span
+      className={cn("text-xs font-medium", color)}
+      style={{
+        background:
+          "linear-gradient(90deg, rgba(255,255,255,0) 0%, currentColor 0%, currentColor 100%)",
+        WebkitBackgroundClip: "text",
+        WebkitTextFillColor: "transparent",
+        fontWeight: 700,
+      }}
+    >
+      {text}
+    </span>
+  );
+};
+
 const ProductInfo = ({
   product,
   isExpanded,
@@ -79,7 +106,7 @@ const ProductInfo = ({
         <div className="rounded bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-700">
           {product.productScoring?.fitScore ?? 0}%
         </div>
-        <span className="text-xs text-gray-600">Okay fit</span>
+        <FitScoreDisplay score={product.productScoring?.fitScore ?? 0} />
       </div>
 
       {/* Flow chart connector - Fork-shaped */}
