@@ -8,6 +8,7 @@ import { Requirement, type TimePeriod } from "./types";
 
 export const productRouter = createTRPCRouter({
   getAll: publicProcedure.query(async () => {
+    // kept for the purpose of testing this assignment both with api and with with db data
     if (env.USE_API_DATA === "true") {
       return data;
     }
