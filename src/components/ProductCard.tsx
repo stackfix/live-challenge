@@ -1,4 +1,9 @@
-import { ChevronDown, ExternalLink, Info, Split } from "lucide-react";
+import {
+  ArrowRightIcon,
+  ExternalLinkIcon,
+  InfoCircledIcon,
+  TriangleRightIcon,
+} from "@radix-ui/react-icons";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -11,9 +16,7 @@ interface ProductCardProps {
   isLoading?: boolean;
 }
 const FlowChartConnector = () => (
-  <div className="flex items-center gap-2">
-    <Split className="h-4 w-4 rotate-90 text-gray-200" />
-  </div>
+  <ArrowRightIcon className="h-4 w-4 text-gray-200" />
 );
 
 // Left Section - Logo
@@ -48,7 +51,7 @@ const ProductInfo = ({
         className="flex items-center gap-2 hover:underline"
       >
         <h2 className="text-base font-semibold">{product.name}</h2>
-        <ExternalLink className="h-3.5 w-3.5 text-gray-400" />
+        <ExternalLinkIcon className="h-3.5 w-3.5 text-gray-400" />
       </Link>
       <span className="rounded-md bg-red-100 px-1.5 py-0.5 text-xs font-medium text-red-700">
         Difficult to use
@@ -64,12 +67,12 @@ const ProductInfo = ({
       <div className="flex items-center gap-2">
         <button
           onClick={onExpandClick}
-          className="flex h-5 w-5 items-center justify-center"
+          className="flex h-5 w-5 items-center justify-center rounded-full hover:bg-gray-100"
         >
-          <ChevronDown
+          <TriangleRightIcon
             className={cn(
-              "h-3.5 w-3.5 transition-transform",
-              isExpanded && "rotate-180",
+              "h-4 w-4 text-gray-500 transition-transform duration-200",
+              isExpanded ? "rotate-90" : "rotate-0",
             )}
           />
         </button>
@@ -148,7 +151,7 @@ const PricingInfo = ({ product }: { product: Product }) => (
       </div>
       <div className="flex items-center justify-end gap-1 text-sm text-gray-500">
         Per month
-        <Info className="h-4 w-4" />
+        <InfoCircledIcon className="h-4 w-4" />
       </div>
     </div>
     <Link
@@ -245,13 +248,14 @@ export function ProductCard({ product, isLoading }: ProductCardProps) {
   return (
     <Card className="w-full bg-[#FAF7F7]">
       <CardContent className="p-6">
-        <div className="flex w-full items-start justify-between gap-6">
+        <div className="flex w-full items-start gap-6">
           <ProductLogo product={product} />
           <ProductInfo
             product={product}
             isExpanded={isExpanded}
             onExpandClick={() => setIsExpanded(!isExpanded)}
           />
+          <div className="-ml-2 h-[100px] w-[1px] border-0 bg-[#E6E6E6]" />
           <PricingInfo product={product} />
         </div>
 
