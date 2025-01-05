@@ -10,7 +10,8 @@
     "start": "next start",
     "db:setup": "docker compose up -d && pnpm dlx prisma migrate dev && pnpm dlx prisma db seed",
     "db:reset": "docker compose down -v && pnpm db:setup",
-    "db:seed": "prisma db seed"
+    "db:seed": "prisma db seed",
+    "test": "jest"
   },
   "dependencies": {
     "@prisma/client": "^6.1.0",
@@ -37,6 +38,7 @@
   },
   "devDependencies": {
     "@types/eslint": "^8.56.10",
+    "@types/jest": "^29.5.14",
     "@types/node": "^20.14.10",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
@@ -44,10 +46,12 @@
     "@typescript-eslint/parser": "^8.1.0",
     "eslint": "^8.57.0",
     "eslint-config-next": "^14.2.4",
+    "jest": "^29.7.0",
     "postcss": "^8.4.39",
     "prettier": "^3.3.2",
     "prettier-plugin-tailwindcss": "^0.6.5",
     "tailwindcss": "^3.4.3",
+    "ts-jest": "^29.2.5",
     "tsx": "^4.19.2",
     "typescript": "^5.5.3"
   },

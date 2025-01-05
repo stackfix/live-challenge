@@ -54,26 +54,31 @@ export class ProductRepository {
   }
 
   async getPaginated(page: number, limit: number, search?: string) {
+    // 1. Build the where clause for filtering
     const where: Prisma.ProductWhereInput = search
       ? { OR: [{ name: { contains: search, mode: "insensitive" } }] }
       : {};
 
+    // 2. Execute two database queries in parallel
     const [totalItems, items] = await Promise.all([
+      // 2a. Count total matching items
       prisma.product.count({ where }),
+      // 2b. Get paginated results
       prisma.product.findMany({
         where,
-        skip: (page - 1) * limit,
-        take: limit,
-        orderBy: { name: "asc" },
+        skip: (page - 1) * limit, // Calculate offset
+        take: limit, // Number of items per page
+        orderBy: { name: "asc" }, // Sort by name
         include: { requirements: { select: { name: true, status: true } } },
       }),
     ]);
 
+    // 3. Return formatted response
     return {
-      items: items.map(this.transformProduct),
-      totalItems,
-      currentPage: page,
-      totalPages: Math.ceil(totalItems / limit),
+      items: items.map(this.transformProduct), // Transform items to correct format
+      totalItems, // Total number of matching items
+      currentPage: page, // Current page number
+      totalPages: Math.ceil(totalItems / limit), // Calculate total pages
     };
   }
 }

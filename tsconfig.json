@@ -27,7 +27,8 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["./src/*"]
-    }
+    },
+    "types": ["jest", "node"]
   },
   "include": [
     ".eslintrc.cjs",
