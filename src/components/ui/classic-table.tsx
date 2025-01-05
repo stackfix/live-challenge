@@ -32,13 +32,39 @@ export function ClassicTable<T>({
   currentPage,
   totalItems,
   onPageChange,
-  serverSidePagination = false,
+  serverSidePagination = true,
 }: ClassicTableProps<T>) {
   const [sortConfig, setSortConfig] = useState({
     key: defaultSortColumn || "",
     direction: defaultSortDirection,
   });
   const [searchQuery, setSearchQuery] = useState("");
+
+  // Apply sorting to the current page's data regardless of pagination mode
+  const sortedData = [...data].sort((a, b) => {
+    if (!sortConfig.key) return 0;
+
+    const column = columns.find((col) => col.header === sortConfig.key);
+    if (!column) return 0;
+
+    let aValue: string | number;
+    let bValue: string | number;
+
+    if (typeof column.accessor === "function") {
+      aValue = column.accessor(a);
+      bValue = column.accessor(b);
+    } else {
+      aValue = a[column.accessor] as string | number;
+      bValue = b[column.accessor] as string | number;
+    }
+
+    if (aValue < bValue) return sortConfig.direction === "asc" ? -1 : 1;
+    if (aValue > bValue) return sortConfig.direction === "asc" ? 1 : -1;
+    return 0;
+  });
+
+  // Use sortedData instead of data for rendering
+  const displayData = sortedData;
 
   // Only apply client-side filtering if not using server-side pagination
   const filteredData = serverSidePagination
@@ -54,31 +80,6 @@ export function ClassicTable<T>({
             .toLowerCase()
             .includes(searchQuery.toLowerCase());
         });
-      });
-
-  // Only apply client-side sorting if not using server-side pagination
-  const sortedData = serverSidePagination
-    ? filteredData
-    : [...filteredData].sort((a, b) => {
-        if (!sortConfig.key) return 0;
-
-        const column = columns.find((col) => col.header === sortConfig.key);
-        if (!column) return 0;
-
-        let aValue: string | number;
-        let bValue: string | number;
-
-        if (typeof column.accessor === "function") {
-          aValue = column.accessor(a);
-          bValue = column.accessor(b);
-        } else {
-          aValue = a[column.accessor] as string | number;
-          bValue = b[column.accessor] as string | number;
-        }
-
-        if (aValue < bValue) return sortConfig.direction === "asc" ? -1 : 1;
-        if (aValue > bValue) return sortConfig.direction === "asc" ? 1 : -1;
-        return 0;
       });
 
   // Pagination logic
@@ -178,7 +179,7 @@ export function ClassicTable<T>({
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200 bg-white">
-              {paginatedData.map((item, index) => (
+              {displayData.map((item, index) => (
                 <tr key={index}>
                   {columns.map((column) => (
                     <td
