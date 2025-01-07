@@ -4,6 +4,7 @@ import { cn } from "~/lib/utils";
 export interface Column<T> {
   header: string;
   accessor: ((item: T) => string | number) | keyof T;
+  cell?: (item: T) => React.ReactNode;
   sortable?: boolean;
 }
 
@@ -186,9 +187,11 @@ export function ClassicTable<T>({
                       key={column.header}
                       className="whitespace-nowrap px-6 py-4 text-sm text-gray-500"
                     >
-                      {typeof column.accessor === "function"
-                        ? column.accessor(item)
-                        : String(item[column.accessor])}
+                      {column.cell
+                        ? column.cell(item)
+                        : typeof column.accessor === "function"
+                          ? column.accessor(item)
+                          : String(item[column.accessor])}
                     </td>
                   ))}
                 </tr>

@@ -26,27 +26,36 @@ export default function TableView() {
       header: "Name",
       accessor: "name" as keyof Product,
       sortable: true,
+      cell: (product: Product) => (
+        <Link href={`/product/${product.slug}`}>{product.name}</Link>
+      ),
     },
     {
       header: "Fit Score",
       accessor: (product: Product) => product.productScoring?.fitScore ?? 0,
       sortable: true,
+      cell: (product: Product) => product.productScoring?.fitScore.toString(),
     },
     {
       header: "Requirements Met",
       accessor: (product: Product) =>
         `${product.requirements?.filter((r) => r.status === "met")?.length ?? 0}/${product.requirements?.length ?? 0}`,
       sortable: true,
+      cell: (product: Product) =>
+        `${product.requirements?.filter((r) => r.status === "met")?.length ?? 0}/${product.requirements?.length ?? 0}`,
     },
     {
       header: "Stackfix Rating",
       accessor: (product: Product) =>
         product.productScoring?.stackfixScore ?? 0,
       sortable: true,
+      cell: (product: Product) =>
+        product.productScoring?.stackfixScore.toString(),
     },
     {
       header: "Price",
-      accessor: (product: Product) =>
+      accessor: (product: Product) => product.pricing?.totalPrice ?? 0,
+      cell: (product: Product) =>
         `$${product.pricing?.totalPrice.toLocaleString() ?? 0}/month`,
       sortable: true,
     },
