@@ -67,30 +67,8 @@ export function ClassicTable<T>({
   // Use sortedData instead of data for rendering
   const displayData = sortedData;
 
-  // Only apply client-side filtering if not using server-side pagination
-  const filteredData = serverSidePagination
-    ? data
-    : data.filter((item) => {
-        if (!searchQuery) return true;
-        return columns.some((column) => {
-          const value =
-            typeof column.accessor === "function"
-              ? column.accessor(item)
-              : item[column.accessor];
-          return String(value)
-            .toLowerCase()
-            .includes(searchQuery.toLowerCase());
-        });
-      });
-
   // Pagination logic
   const totalPages = Math.ceil(totalItems / rowsPerPage);
-  const paginatedData = serverSidePagination
-    ? sortedData
-    : sortedData.slice(
-        (currentPage - 1) * rowsPerPage,
-        currentPage * rowsPerPage,
-      );
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const query = e.target.value;
