@@ -7,6 +7,7 @@ import type { Product } from "~/server/api/routers/product/types";
 import ProductCardRequirements from './ProductCardRequirements'
 import { useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export interface ProductCardProps {
   product: Product
@@ -15,18 +16,24 @@ export interface ProductCardProps {
 export default function ProductCard({ product }: ProductCardProps) {
   const [detailsDisabled, setDetailsdisabled] = useState(false);
 
+  const slug = `/product/${product.slug}`;
+
   return (
     <Card>
       <CardHeader className="flex flex-row items-start justify-between space-y-0 pb-2">
         <div className="flex items-start gap-4">
           <div className="h-12 w-12 rounded bg-slate-100 flex items-center justify-center text-xl font-bold">
             { /* TODO: image src */ }
-            <Image src={product.logoUrl ?? ''} alt={product.name} width={48} height={48} />
+            <Link href={slug}>
+              <Image src={product.logoUrl ?? ''} alt={product.name} width={48} height={48} />
+            </Link>
           </div>
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <h3 className="font-semibold text-lg">Pipedrive</h3>
-              <ExternalLink className="h-4 w-4" />
+              <ExternalLink className="h-4 w-4" >
+                <Link href={slug}/>
+              </ExternalLink>
               <Badge variant="secondary" className="bg-red-50 text-red-700 hover:bg-red-50">
                 {product.dealBreakers}
               </Badge>
@@ -37,8 +44,8 @@ export default function ProductCard({ product }: ProductCardProps) {
               </Badge>
               {
                 detailsDisabled
-                ? <ChevronDown className="h-4 w-4" onClick={() => setDetailsdisabled(!detailsDisabled)}/>
-                : <ChevronRight className="h-4 w-4" onClick={() => setDetailsdisabled(!detailsDisabled)}/>
+                  ? <ChevronDown className="h-4 w-4" onClick={() => setDetailsdisabled(!detailsDisabled)}/>
+                  : <ChevronRight className="h-4 w-4" onClick={() => setDetailsdisabled(!detailsDisabled)}/>
               }
               <span className="text-sm text-muted-foreground">Okay fit</span>
             </div>
@@ -73,5 +80,5 @@ export default function ProductCard({ product }: ProductCardProps) {
       </CardContent>
     </Card>
   )
- }
+}
 
