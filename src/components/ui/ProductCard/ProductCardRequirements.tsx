@@ -1,6 +1,6 @@
-import { Check } from 'lucide-react'
 import { Badge } from "~/components/ui/badge"
 import type { Product } from '~/server/api/routers/product/types'
+import ProductCardRequirementListIcon from './ProductCardRequirementListIcon'
 
 export interface ProductCardRequirementsProps {
   requirements: Product['requirements']
@@ -12,10 +12,10 @@ export default function ProductCardRequirements({ requirements, ratings }: Produ
     <div className="space-y-4">
       <h4 className="text-sm font-medium text-muted-foreground">REQUIREMENTS MET</h4>
       <ul className="space-y-3">
-        {requirements.map(({name }) => (
+        {requirements.map(({name, status }) => (
           <li key={name} className="flex items-center gap-2">
-            <div className="h-5 w-5 rounded-full bg-green-100 flex items-center justify-center">
-              <Check className="h-3 w-3 text-green-600" />
+            <div className="h-5 w-5 rounded-full flex items-center justify-center">
+              <ProductCardRequirementListIcon status={status} />
             </div>
             <span className="text-sm">{name}</span>
           </li>
