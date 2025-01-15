@@ -5,6 +5,11 @@ type Requirement = {
   status: "met" | "unmet" | "partially-met";
 };
 
+type StackFixRating ={
+  name: string;
+  score: number;
+};
+
 export type Product = {
   id: string;
   name: string;
@@ -20,4 +25,5 @@ export type Product = {
     period: TimePeriod;
   };
   requirements: Array<Requirement>;
+  ratings: Array<StackFixRating>;
 };

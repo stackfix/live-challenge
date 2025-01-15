@@ -1,5 +1,15 @@
 import { type Product } from "./types";
 
+const ratings = [
+  { name: "Ease of use", score: 9.2, },
+  { name: "Functionality", score: 4.1},
+  { name: "Customization", score: 4.1},
+  { name: "Exportability", score: 3.8},
+  { name: "Customer Support", score: 7.2},
+  { name: "Compliance", score: 8.2 },
+];
+
+
 export const data: Product[] = [
   {
     id: "1",
@@ -15,6 +25,7 @@ export const data: Product[] = [
       totalPrice: 1890.99,
       period: "month",
     },
+    ratings,
     requirements: [
       { name: "Store contact or deal information", status: "met" },
       { name: "Email warm up", status: "unmet" },
@@ -38,6 +49,7 @@ export const data: Product[] = [
       totalPrice: 3567.99,
       period: "month",
     },
+    ratings,
     requirements: [
       { name: "Store contact or deal information", status: "met" },
       { name: "Email warm up", status: "met" },
@@ -61,6 +73,7 @@ export const data: Product[] = [
       totalPrice: 2450.0,
       period: "month",
     },
+    ratings,
     requirements: [
       { name: "Store contact or deal information", status: "met" },
       { name: "Email warm up", status: "met" },
@@ -84,6 +97,7 @@ export const data: Product[] = [
       totalPrice: 899.99,
       period: "month",
     },
+    ratings,
     requirements: [
       { name: "Store contact or deal information", status: "met" },
       { name: "Email warm up", status: "partially-met" },
@@ -110,6 +124,7 @@ export const data: Product[] = [
       totalPrice: 1299.0,
       period: "month",
     },
+    ratings,
     requirements: [
       { name: "Store contact or deal information", status: "met" },
       { name: "Email warm up", status: "unmet" },
@@ -133,6 +148,7 @@ export const data: Product[] = [
       totalPrice: 599.99,
       period: "month",
     },
+    ratings,
     requirements: [
       { name: "Store contact or deal information", status: "met" },
       { name: "Email warm up", status: "unmet" },
@@ -159,6 +175,7 @@ export const data: Product[] = [
       totalPrice: 1199.0,
       period: "month",
     },
+    ratings,
     requirements: [
       { name: "Store contact or deal information", status: "met" },
       { name: "Email warm up", status: "partially-met" },
@@ -182,6 +199,7 @@ export const data: Product[] = [
       totalPrice: 799.0,
       period: "month",
     },
+    ratings,
     requirements: [
       { name: "Store contact or deal information", status: "met" },
       { name: "Email warm up", status: "unmet" },
@@ -208,6 +226,7 @@ export const data: Product[] = [
       totalPrice: 1599.99,
       period: "month",
     },
+    ratings,
     requirements: [
       { name: "Store contact or deal information", status: "met" },
       { name: "Email warm up", status: "met" },
@@ -231,6 +250,7 @@ export const data: Product[] = [
       totalPrice: 0,
       period: "month",
     },
+    ratings,
     requirements: [
       { name: "Store contact or deal information", status: "met" },
       { name: "Email warm up", status: "unmet" },
@@ -258,6 +278,7 @@ export const data: Product[] = [
       totalPrice: 399.99,
       period: "month",
     },
+    ratings,
     requirements: [
       { name: "Store contact or deal information", status: "partially-met" },
       { name: "Email warm up", status: "unmet" },
@@ -284,6 +305,7 @@ export const data: Product[] = [
       totalPrice: 0,
       period: "month",
     },
+    ratings,
     requirements: [
       { name: "Store contact or deal information", status: "met" },
       { name: "Email warm up", status: "partially-met" },
@@ -310,6 +332,7 @@ export const data: Product[] = [
       totalPrice: 499.99,
       period: "month",
     },
+    ratings,
     requirements: [
       { name: "Store contact or deal information", status: "met" },
       { name: "Email warm up", status: "met" },
@@ -337,6 +360,7 @@ export const data: Product[] = [
       totalPrice: 0,
       period: "month",
     },
+    ratings,
     requirements: [
       { name: "Store contact or deal information", status: "met" },
       { name: "Email warm up", status: "unmet" },
@@ -363,6 +387,7 @@ export const data: Product[] = [
       totalPrice: 4799.99,
       period: "month",
     },
+    ratings,
     requirements: [
       { name: "Store contact or deal information", status: "met" },
       { name: "Email warm up", status: "met" },
@@ -386,6 +411,7 @@ export const data: Product[] = [
       totalPrice: 0,
       period: "month",
     },
+    ratings,
     requirements: [
       { name: "Store contact or deal information", status: "met" },
       { name: "Email warm up", status: "unmet" },
@@ -417,6 +443,7 @@ export const data: Product[] = [
       totalPrice: 599.99,
       period: "month",
     },
+    ratings,
     requirements: [
       { name: "Store contact or deal information", status: "partially-met" },
       { name: "Email warm up", status: "unmet" },
