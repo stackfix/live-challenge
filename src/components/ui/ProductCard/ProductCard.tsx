@@ -6,18 +6,22 @@ import { Progress } from "~/components/ui/progress"
 import type { Product } from "~/server/api/routers/product/types";
 import ProductCardRequirements from './ProductCardRequirements'
 import { useState } from 'react'
+import Image from 'next/image'
 
 export interface ProductCardProps {
   product: Product
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
+  const [detailsDisabled, setDetailsdisabled] = useState(false);
+
   return (
     <Card>
       <CardHeader className="flex flex-row items-start justify-between space-y-0 pb-2">
         <div className="flex items-start gap-4">
           <div className="h-12 w-12 rounded bg-slate-100 flex items-center justify-center text-xl font-bold">
-            P
+            { /* TODO: image src */ }
+            <Image src={product.logoUrl ?? ''} alt={product.name} width={48} height={48} />
           </div>
           <div className="space-y-2">
             <div className="flex items-center gap-2">
@@ -55,19 +59,19 @@ export default function ProductCard({ product }: ProductCardProps) {
               <span>REQUIREMENTS MET</span>
               <span>3/6</span>
             </div>
-            <Progress value={50} className="h-2" />
+            <Progress value={product.productScoring.fitScore} className="h-2" />
           </div>
           <div className="space-y-2">
             <div className="flex justify-between text-sm">
               <span>STACK/FIX RATING</span>
               <span>7.9</span>
             </div>
-            <Progress value={79} className="h-2" />
+            <Progress value={product.productScoring.stackfixScore} className="h-2" />
           </div>
         </div>
         {detailsDisabled && <ProductCardRequirements/>}
       </CardContent>
     </Card>
   )
-}
+ }
 

@@ -1,7 +1,12 @@
 import { Check } from 'lucide-react'
 import { Badge } from "~/components/ui/badge"
+import type { Product } from '~/server/api/routers/product/types'
 
-export default function ProductCardRequirements() {
+export interface ProductCardRequirementsProps {
+  requirements: Product['requirements']
+}
+
+export default function ProductCardRequirements({ requirements }: ProductCardRequirementsProps) {
   return( <div className="grid grid-cols-2 gap-8 mt-8">
     <div className="space-y-4">
       <h4 className="text-sm font-medium text-muted-foreground">REQUIREMENTS MET</h4>
@@ -52,4 +57,4 @@ rating.color === "emerald"
       </ul>
     </div>
   </div> )
-}
+ }
