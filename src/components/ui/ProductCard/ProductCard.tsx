@@ -69,7 +69,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             <Progress value={product.productScoring.stackfixScore} className="h-2" />
           </div>
         </div>
-        {detailsDisabled && <ProductCardRequirements requirements={product.requirements}/>}
+        {detailsDisabled && <ProductCardRequirements requirements={product.requirements} ratings={product.ratings} />}
       </CardContent>
     </Card>
   )
