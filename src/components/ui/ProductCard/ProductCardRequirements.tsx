@@ -11,19 +11,12 @@ export default function ProductCardRequirements({ requirements }: ProductCardReq
     <div className="space-y-4">
       <h4 className="text-sm font-medium text-muted-foreground">REQUIREMENTS MET</h4>
       <ul className="space-y-3">
-        {[
-          "Sync with calendars and track meetings",
-          "Manage Sales Pipeline",
-          "Track email engagement rates",
-          "Make and track phone calls directly from my browser",
-          "Send automated email sequences",
-          "Manage contact or deal information",
-        ].map((requirement) => (
-            <li key={requirement} className="flex items-center gap-2">
+        {requirements.map(({name, status}) => (
+            <li key={name} className="flex items-center gap-2">
               <div className="h-5 w-5 rounded-full bg-green-100 flex items-center justify-center">
                 <Check className="h-3 w-3 text-green-600" />
               </div>
-              <span className="text-sm">{requirement}</span>
+              <span className="text-sm">{name}</span>
             </li>
           ))}
       </ul>
