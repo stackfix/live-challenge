@@ -21,7 +21,7 @@ export const data: Product[] = [
       { name: "Email sequencing", status: "met" },
       { name: "Email templates", status: "partially-met" },
       { name: "Geo-fencing lead management", status: "unmet" },
-      { name: "Track website activity of new vistors", status: "met" },
+      { name: "Track website activity of new visitors", status: "met" },
     ],
   },
   {
@@ -44,7 +44,7 @@ export const data: Product[] = [
       { name: "Email sequencing", status: "met" },
       { name: "Email templates", status: "met" },
       { name: "Geo-fencing lead management", status: "met" },
-      { name: "Track website activity of new vistors", status: "unmet" },
+      { name: "Track website activity of new visitors", status: "unmet" },
     ],
   },
   {
@@ -67,7 +67,7 @@ export const data: Product[] = [
       { name: "Email sequencing", status: "met" },
       { name: "Email templates", status: "met" },
       { name: "Geo-fencing lead management", status: "partially-met" },
-      { name: "Track website activity of new vistors", status: "met" },
+      { name: "Track website activity of new visitors", status: "met" },
     ],
   },
   {
@@ -91,7 +91,7 @@ export const data: Product[] = [
       { name: "Email templates", status: "met" },
       { name: "Geo-fencing lead management", status: "unmet" },
       {
-        name: "Track website activity of new vistors",
+        name: "Track website activity of new visitors",
         status: "partially-met",
       },
     ],
@@ -116,7 +116,7 @@ export const data: Product[] = [
       { name: "Email sequencing", status: "partially-met" },
       { name: "Email templates", status: "met" },
       { name: "Geo-fencing lead management", status: "partially-met" },
-      { name: "Track website activity of new vistors", status: "met" },
+      { name: "Track website activity of new visitors", status: "met" },
     ],
   },
   {
@@ -140,7 +140,7 @@ export const data: Product[] = [
       { name: "Email templates", status: "met" },
       { name: "Geo-fencing lead management", status: "unmet" },
       {
-        name: "Track website activity of new vistors",
+        name: "Track website activity of new visitors",
         status: "partially-met",
       },
     ],
@@ -165,7 +165,7 @@ export const data: Product[] = [
       { name: "Email sequencing", status: "met" },
       { name: "Email templates", status: "met" },
       { name: "Geo-fencing lead management", status: "unmet" },
-      { name: "Track website activity of new vistors", status: "met" },
+      { name: "Track website activity of new visitors", status: "met" },
     ],
   },
   {
@@ -189,7 +189,7 @@ export const data: Product[] = [
       { name: "Email templates", status: "met" },
       { name: "Geo-fencing lead management", status: "unmet" },
       {
-        name: "Track website activity of new vistors",
+        name: "Track website activity of new visitors",
         status: "partially-met",
       },
     ],
@@ -214,7 +214,7 @@ export const data: Product[] = [
       { name: "Email sequencing", status: "met" },
       { name: "Email templates", status: "met" },
       { name: "Geo-fencing lead management", status: "met" },
-      { name: "Track website activity of new vistors", status: "met" },
+      { name: "Track website activity of new visitors", status: "met" },
     ],
   },
   {
@@ -237,7 +237,7 @@ export const data: Product[] = [
       { name: "Email sequencing", status: "unmet" },
       { name: "Email templates", status: "partially-met" },
       { name: "Geo-fencing lead management", status: "unmet" },
-      { name: "Track website activity of new vistors", status: "unmet" },
+      { name: "Track website activity of new visitors", status: "unmet" },
     ],
   },
   {
@@ -265,7 +265,7 @@ export const data: Product[] = [
       { name: "Email templates", status: "partially-met" },
       { name: "Geo-fencing lead management", status: "unmet" },
       {
-        name: "Track website activity of new vistors",
+        name: "Track website activity of new visitors",
         status: "partially-met",
       },
     ],
@@ -291,7 +291,7 @@ export const data: Product[] = [
       { name: "Email templates", status: "met" },
       { name: "Geo-fencing lead management", status: "unmet" },
       {
-        name: "Track website activity of new vistors",
+        name: "Track website activity of new visitors",
         status: "partially-met",
       },
     ],
@@ -316,7 +316,7 @@ export const data: Product[] = [
       { name: "Email sequencing", status: "met" },
       { name: "Email templates", status: "met" },
       { name: "Geo-fencing lead management", status: "met" },
-      { name: "Track website activity of new vistors", status: "met" },
+      { name: "Track website activity of new visitors", status: "met" },
     ],
   },
   {
@@ -344,7 +344,7 @@ export const data: Product[] = [
       { name: "Email templates", status: "met" },
       { name: "Geo-fencing lead management", status: "unmet" },
       {
-        name: "Track website activity of new vistors",
+        name: "Track website activity of new visitors",
         status: "partially-met",
       },
     ],
@@ -369,7 +369,7 @@ export const data: Product[] = [
       { name: "Email sequencing", status: "met" },
       { name: "Email templates", status: "met" },
       { name: "Geo-fencing lead management", status: "met" },
-      { name: "Track website activity of new vistors", status: "met" },
+      { name: "Track website activity of new visitors", status: "met" },
     ],
   },
   {
@@ -393,7 +393,7 @@ export const data: Product[] = [
       { name: "Email templates", status: "met" },
       { name: "Geo-fencing lead management", status: "unmet" },
       {
-        name: "Track website activity of new vistors",
+        name: "Track website activity of new visitors",
         status: "partially-met",
       },
     ],
@@ -423,7 +423,7 @@ export const data: Product[] = [
       { name: "Email sequencing", status: "unmet" },
       { name: "Email templates", status: "partially-met" },
       { name: "Geo-fencing lead management", status: "unmet" },
-      { name: "Track website activity of new vistors", status: "unmet" },
+      { name: "Track website activity of new visitors", status: "unmet" },
     ],
   },
 ];
