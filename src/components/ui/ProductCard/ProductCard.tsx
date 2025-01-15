@@ -3,12 +3,15 @@ import { Badge } from "~/components/ui/badge"
 import { Button } from "~/components/ui/button"
 import { Card, CardContent, CardHeader } from "~/components/ui/card"
 import { Progress } from "~/components/ui/progress"
+import type { Product } from "~/server/api/routers/product/types";
 import ProductCardRequirements from './ProductCardRequirements'
 import { useState } from 'react'
 
-export default function ProductCard() {
-  const [detailsDisabled, setDetailsdisabled] =useState(false)
+export interface ProductCardProps {
+  product: Product
+}
 
+export default function ProductCard({ product }: ProductCardProps) {
   return (
     <Card>
       <CardHeader className="flex flex-row items-start justify-between space-y-0 pb-2">

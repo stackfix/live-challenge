@@ -1,7 +1,7 @@
 import Head from "next/head";
 import ProductCard from "~/components/ui/ProductCard/ProductCard";
 import ProductCardSkeleton from "~/components/ui/ProductCard/ProductCardSkeleton";
-import { type Product } from "~/server/api/routers/product/types";
+import type { Product } from "~/server/api/routers/product/types";
 import { api } from "~/utils/api";
 
 export function ProductCards({ products }: {products: Product[]}) {
@@ -9,7 +9,7 @@ export function ProductCards({ products }: {products: Product[]}) {
     <div className="grid">
       {
         products.map((product) => (
-          <ProductCard key={product.id} />
+          <ProductCard key={product.id} product={product}/>
         ))
       }
     </div>
