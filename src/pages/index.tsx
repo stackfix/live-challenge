@@ -1,7 +1,21 @@
 import Head from "next/head";
 import ProductCard from "~/components/ui/ProductCard/ProductCard";
 import ProductCardSkeleton from "~/components/ui/ProductCard/ProductCardSkeleton";
+import { type Product } from "~/server/api/routers/product/types";
 import { api } from "~/utils/api";
+
+export function ProductCards({ products }: {products: Product[]}) {
+  return (
+    <div className="grid">
+      {
+        products.map((product) => (
+          <ProductCard key={product.id} />
+        ))
+      }
+    </div>
+  )
+
+}
 
 export default function Home() {
   const { data: products } = api.product.getAll.useQuery()
@@ -19,8 +33,8 @@ export default function Home() {
         <div className="w-full max-w-4xl">
           {
             products == null 
-            ? <ProductCardSkeleton/>
-            : <ProductCard/>
+              ? <ProductCardSkeleton/>
+              : <ProductCards products={products}/>
           }
         </div>
       </main>
