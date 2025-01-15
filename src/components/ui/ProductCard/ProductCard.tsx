@@ -1,11 +1,14 @@
-import { ExternalLink,  } from 'lucide-react'
+import { ChevronDown, ChevronRight, ExternalLink,  } from 'lucide-react'
 import { Badge } from "~/components/ui/badge"
 import { Button } from "~/components/ui/button"
 import { Card, CardContent, CardHeader } from "~/components/ui/card"
 import { Progress } from "~/components/ui/progress"
 import ProductCardRequirements from './ProductCardRequirements'
+import { useState } from 'react'
 
 export default function ProductCard() {
+  const [detailsDisabled, setDetailsdisabled] =useState(false)
+
   return (
     <Card>
       <CardHeader className="flex flex-row items-start justify-between space-y-0 pb-2">
@@ -25,6 +28,11 @@ export default function ProductCard() {
               <Badge variant="secondary" className="bg-orange-100 text-orange-700 hover:bg-orange-100">
                 67%
               </Badge>
+              {
+                detailsDisabled
+                ? <ChevronDown className="h-4 w-4" onClick={() => setDetailsdisabled(!detailsDisabled)}/>
+                : <ChevronRight className="h-4 w-4" onClick={() => setDetailsdisabled(!detailsDisabled)}/>
+              }
               <span className="text-sm text-muted-foreground">Okay fit</span>
             </div>
           </div>
@@ -54,7 +62,7 @@ export default function ProductCard() {
             <Progress value={79} className="h-2" />
           </div>
         </div>
-        <ProductCardRequirements/>
+        {detailsDisabled && <ProductCardRequirements/>}
       </CardContent>
     </Card>
   )
