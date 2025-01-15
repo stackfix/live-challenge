@@ -28,7 +28,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               <h3 className="font-semibold text-lg">Pipedrive</h3>
               <ExternalLink className="h-4 w-4" />
               <Badge variant="secondary" className="bg-red-50 text-red-700 hover:bg-red-50">
-                Difficult to use
+                {product.dealBreakers}
               </Badge>
             </div>
             <div className="flex items-center gap-2">
