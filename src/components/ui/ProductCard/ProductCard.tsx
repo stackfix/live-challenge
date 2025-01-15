@@ -30,7 +30,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           </div>
           <div className="space-y-2">
             <div className="flex items-center gap-2">
-              <h3 className="font-semibold text-lg">Pipedrive</h3>
+              <h3 className="font-semibold text-lg">{product.name}</h3>
               <ExternalLink className="h-4 w-4" >
                 <Link href={slug}/>
               </ExternalLink>
