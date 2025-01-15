@@ -45,8 +45,8 @@ export default function ProductCard({ product }: ProductCardProps) {
           </div>
         </div>
         <div className="text-right">
-          <div className="text-2xl font-bold">$2,559</div>
-          <div className="text-sm text-muted-foreground">Per month</div>
+          <div className="text-2xl font-bold">{product.pricing.totalPrice}</div>
+          <div className="text-sm text-muted-foreground">{`per ${product.pricing.period}`}</div>
           <Button variant="link" className="p-0 h-auto mt-1">
             More details
           </Button>
