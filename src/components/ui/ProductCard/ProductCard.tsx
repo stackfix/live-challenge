@@ -7,7 +7,7 @@ import ProductCardRequirements from './ProductCardRequirements'
 
 export default function ProductCard() {
   return (
-    <Card className="w-full max-w-4xl">
+    <Card>
       <CardHeader className="flex flex-row items-start justify-between space-y-0 pb-2">
         <div className="flex items-start gap-4">
           <div className="h-12 w-12 rounded bg-slate-100 flex items-center justify-center text-xl font-bold">

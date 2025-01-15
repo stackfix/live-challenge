@@ -15,7 +15,8 @@ export default function Home() {
       <main className="p-5">
         <h1 className="text-xl">Stackfix Live Challenge</h1>
         {/* TODO: Your code here */}
-        <ProductCard/>
+        <div className="w-full max-w-4xl">
+        </div>
       </main>
     </>
   );
