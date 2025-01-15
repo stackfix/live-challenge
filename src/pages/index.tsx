@@ -1,4 +1,5 @@
 import Head from "next/head";
+import ProductCard from "~/components/ui/ProductCard/ProductCard";
 import { api } from "~/utils/api";
 
 export default function Home() {
@@ -14,6 +15,7 @@ export default function Home() {
       <main className="p-5">
         <h1 className="text-xl">Stackfix Live Challenge</h1>
         {/* TODO: Your code here */}
+        <ProductCard/>
       </main>
     </>
   );
